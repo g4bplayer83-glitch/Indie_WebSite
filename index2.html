@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indie_WebsiteV2</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0b0b;
+      color: #00ffff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* --- Écran de démarrage --- */
+    #startScreen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, #001f2f, #000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 20;
+      animation: fadeIn 1s ease;
+    }
+
+    #startScreen button {
+      padding: 14px 32px;
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      font-size: 1.2em;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #startScreen button:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 20px #00ffff;
+      transform: scale(1.1);
+    }
+
+    /* --- Écran de chargement Wii U --- */
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, #002f3f, #000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 10;
+      transition: opacity 0.8s ease;
+    }
+
+    #loading.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .orb {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #00ffff;
+      box-shadow: 0 0 25px #00ffff;
+      animation: spinPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes spinPulse {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+      100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+    main {
+      opacity: 0;
+      animation: fadeInMain 1s ease 9s forwards;
+      padding: 20px;
+    }
+
+    @keyframes fadeInMain { to { opacity: 1; } }
+
+    h1 {
+      text-shadow: 0 0 25px #00ffff;
+      font-size: 2.4em;
+      margin: 20px 0;
+      animation: glow 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffff; }
+      to { text-shadow: 0 0 40px #00ffff; }
+    }
+
+    button {
+      background: transparent;
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      color: #00ffff;
+      padding: 10px 25px;
+      margin: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #00ffff;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    video {
+      display: block;
+      margin: 25px auto;
+      border: 3px solid #00ffff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    marquee { margin-bottom: 20px; }
+
+    /* --- Contrôleur audio --- */
+    #soundController {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 20, 25, 0.8);
+      border: 2px solid #00ffff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff;
+      padding: 12px 16px;
+      color: #00ffff;
+      font-size: 0.9em;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: 0.3s;
+    }
+
+    #soundController button {
+      border: 1px solid #00ffff;
+      border-radius: 8px;
+      background: transparent;
+      color: #00ffff;
+      padding: 6px 12px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    #soundController input[type=range] {
+      width: 100px;
+      accent-color: #00ffff;
+    }
+
+    #soundController:hover {
+      box-shadow: 0 0 25px #00ffff;
+      transform: scale(1.03);
+    }
+
+    #clock {
+      font-size: 0.9em;
+      color: #00ffff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Écran de démarrage -->
+  <div id="startScreen">
+    <h1>Indie_WebsiteV2</h1>
+    <p style="color:#00ffff;margin-bottom:20px;">Appuyez pour commencer</p>
+    <button id="startButton">▶ Commencer</button>
+  </div>
+
+  <!-- Écran de chargement -->
+  <div id="loading">
+    <div class="orb"></div>
+    <p style="color:#00ffff;margin-top:20px;font-size:1.2em;">Chargement...</p>
+  </div>
+
+  <!-- Musiques -->
+  <audio id="introMusic" src="intro.wav"></audio>
+  <audio id="bgMusic" src="music.wav" loop></audio>
+
+  <!-- Effets -->
+  <audio id="hoverSound" src="hover.wav"></audio>
+  <audio id="clickSound" src="click.wav"></audio>
+
+  <!-- Contenu principal -->
+  <main>
+    <h1>Bienvenue sur Indie_WebsiteV2</h1>
+    <marquee direction="left" scrollamount="10"><h2>En cours de développement</h2></marquee>
+
+    <div>
+      <button onclick="playClick(); getVolume()">Quel est le volume ?</button>
+      <button onclick="playClick(); setHalfVolume()">Volume 0.2</button>
+      <button onclick="playClick(); setFullVolume()">Volume 1.0</button>
+    </div>
+
+    <video id="myVideo" width="480" height="270" controls>
+      <source src="ULTRAKILL Montage - TEOAT.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+
+    <div>
+      <button onclick="playClick(); showDate()">Afficher la date et l'heure</button>
+      <p id="demo"></p>
+    </div>
+  </main>
+
+  <!-- Contrôleur flottant -->
+  <div id="soundController">
+    <button id="toggleMusic">⏸ Pause musique</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5">
+    <div id="clock">--:--:--</div>
+  </div>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const startScreen = document.getElementById("startScreen");
+    const loading = document.getElementById("loading");
+    const introMusic = document.getElementById("introMusic");
+    const bgMusic = document.getElementById("bgMusic");
+    const hoverSound = document.getElementById("hoverSound");
+    const clickSound = document.getElementById("clickSound");
+    const vid = document.getElementById("myVideo");
+    const demo = document.getElementById("demo");
+
+    const toggleMusic = document.getElementById("toggleMusic");
+    const volumeSlider = document.getElementById("volumeSlider");
+    const clock = document.getElementById("clock");
+
+    let isFading = false;
+
+    // Écran de démarrage
+    startButton.addEventListener("click", () => {
+      playClick();
+      startScreen.style.animation = "fadeOut 0.8s forwards";
+      setTimeout(() => {
+        loading.classList.add("active");
+        introMusic.volume = 0.6;
+        bgMusic.volume = 0.5;
+        introMusic.play();
+        setTimeout(() => {
+          introMusic.pause();
+          loading.classList.remove("active");
+          bgMusic.play();
+        }, 9000);
+      }, 500);
+    });
+
+    // Fade audio
+    function fadeOutAudio(audio, duration = 1000) {
+      if (isFading) return;
+      isFading = true;
+      const step = audio.volume / (duration / 50);
+      const fade = setInterval(() => {
+        if (audio.volume > 0.05) {
+          audio.volume -= step;
+        } else {
+          audio.volume = 0;
+          audio.pause();
+          clearInterval(fade);
+          isFading = false;
+        }
+      }, 50);
+    }
+
+    function fadeInAudio(audio, targetVol = 0.5, duration = 1000) {
+      if (isFading) return;
+      isFading = true;
+      audio.play();
+      let vol = 0;
+      audio.volume = 0;
+      const step = targetVol / (duration / 50);
+      const fade = setInterval(() => {
+        if (vol < targetVol) {
+          vol += step;
+          audio.volume = vol;
+        } else {
+          audio.volume = targetVol;
+          clearInterval(fade);
+          isFading = false;
+        }
+      }, 50);
+    }
+
+    // Fade musique quand la vidéo joue
+    vid.addEventListener("play", () => fadeOutAudio(bgMusic, 1200));
+    vid.addEventListener("pause", () => fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 1200));
+    vid.addEventListener("ended", () => fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 1200));
+
+    // Sons de survol
+    document.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("mouseenter", () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+      });
+    });
+
+    function playClick() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+
+    // Gestion musique / volume
+    toggleMusic.addEventListener("click", () => {
+      if (bgMusic.paused) {
+        fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 800);
+        toggleMusic.textContent = "⏸ Pause musique";
+      } else {
+        fadeOutAudio(bgMusic, 800);
+        toggleMusic.textContent = "▶ Reprendre musique";
+      }
+      playClick();
+    });
+
+    volumeSlider.addEventListener("input", () => {
+      const vol = parseFloat(volumeSlider.value);
+      bgMusic.volume = vol;
+      introMusic.volume = vol;
+    });
+
+    // Horloge
+    setInterval(() => {
+      const now = new Date();
+      clock.textContent = now.toLocaleTimeString();
+    }, 1000);
+
+    // Fonctions utilitaires
+    function getVolume() { alert("Volume actuel : " + vid.volume); }
+    function setHalfVolume() { vid.volume = 0.2; }
+    function setFullVolume() { vid.volume = 1.0; }
+    function showDate() { demo.innerHTML = new Date().toLocaleString(); }
+  </script>
+</body>
+</html>
