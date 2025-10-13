@@ -21,7 +21,7 @@
       text-shadow: 0 0 20px #00ffff;
     }
 
-    /* Style pour le titre avec effet décrypté */ 
+    /* Style pour le titre */ 
     #mainTitle {
       cursor: pointer;
       transition: all 0.3s;
@@ -106,46 +106,13 @@
       cursor: pointer;
       transition: all 0.3s;
       font-size: 0.9em;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
     }
 
     #skipButton:hover {
       background: rgba(0, 255, 255, 0.4);
-      box-shadow: 0 0 10px #00ffff;
-    }
-
-    /* Écran de chargement */
-    #loading {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle, #002f3f, #000);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      z-index: 10;
-      transition: opacity 0.8s ease;
-    }
-
-    #loading.active {
-      opacity: 0;
-      visibility: visible;
-    }
-
-    .orb {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: #00ffff;
-      box-shadow: 0 0 25px #00ffff;
-      animation: spinPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes spinPulse {
-      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
-      50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
-      100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+      box-shadow: 0 0 15px #00ffff;
+      transform: scale(1.1);
     }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -154,7 +121,7 @@
 
     main {
       opacity: 0;
-      animation: fadeInMain 1s ease 9s forwards;
+      animation: fadeInMain 1s ease forwards;
       padding: 30px;
       padding-bottom: 120px;
     }
@@ -317,15 +284,105 @@
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
 
-    /* Footer avec note */
-    .footer-note {
+    /* Zone de notes avec écriture et dessin */
+    .notes-container {
       background: rgba(0, 255, 255, 0.1);
+      border: 2px solid #00ffff;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 40px auto;
+      max-width: 900px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .notes-title {
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+      border-bottom: 1px solid #00ffff;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .notes-content {
+      display: flex;
+      gap: 20px;
+      min-height: 300px;
+    }
+
+    .text-notes {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawing-notes {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notes-textarea {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid #00ffff;
-      border-radius: 12px;
+      border-radius: 8px;
+      color: #00ffff;
       padding: 15px;
-      margin: 30px auto;
-      max-width: 800px;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+    }
+
+    .notes-textarea::placeholder {
+      color: rgba(0, 255, 255, 0.5);
+    }
+
+    .drawing-canvas {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid #00ffff;
+      border-radius: 8px;
+      cursor: crosshair;
+    }
+
+    .drawing-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+
+    .drawing-controls button {
+      background: rgba(0, 255, 255, 0.2);
+      border: 1px solid #00ffff;
+      color: #00ffff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .drawing-controls button:hover {
+      background: rgba(0, 255, 255, 0.4);
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .color-option {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .color-option.active {
+      border-color: #fff;
     }
 
     /* Animation de particules pour Tetris */
@@ -337,6 +394,7 @@
       border-radius: 50%;
       pointer-events: none;
       opacity: 0.8;
+      z-index: 101;
     }
 
     @keyframes particle-fall {
@@ -376,12 +434,6 @@
     <h1>Indie_WebsiteV2</h1>
     <p style="color:#00ffff;margin-bottom:20px;">Chargement en cours...</p>
     <button id="skipButton">⏩ Passer</button>
-  </div>
-
-  <!-- Écran de chargement -->
-  <div id="loading">
-    <div class="orb"></div>
-    <p style="color:#00ffff;margin-top:20px;font-size:1.2em;">Chargement...</p>
   </div>
 
   <!-- Musiques -->
@@ -448,10 +500,31 @@
 
     <note>📝 Remarque : ce site est encore en développement. Cer<span id="tetrisButton" title="Jouer à Tetris">t</span>aines fonctions peuvent évoluer.</note>
 
-    <!-- Footer avec note -->
-    <div class="footer-note">
-      <h3>Notes du développeur</h3>
-      <p>N'hésitez pas à explorer toutes les fonctionnalités cachées !</p>
+    <!-- Zone de notes avec écriture et dessin -->
+    <div class="notes-container">
+      <h3 class="notes-title">📝 Zone de Notes Personnelles</h3>
+      <div class="notes-content">
+        <div class="text-notes">
+          <h4>Écriture au clavier</h4>
+          <textarea class="notes-textarea" placeholder="Écrivez vos notes ici..."></textarea>
+        </div>
+        <div class="drawing-notes">
+          <h4>Dessin au stylet/souris</h4>
+          <canvas class="drawing-canvas" width="400" height="250"></canvas>
+          <div class="drawing-controls">
+            <div class="color-picker">
+              <div class="color-option active" style="background: #00ffff;" data-color="#00ffff"></div>
+              <div class="color-option" style="background: #ffff00;" data-color="#ffff00"></div>
+              <div class="color-option" style="background: #ff00ff;" data-color="#ff00ff"></div>
+              <div class="color-option" style="background: #00ff00;" data-color="#00ff00"></div>
+              <div class="color-option" style="background: #ffffff;" data-color="#ffffff"></div>
+            </div>
+            <button id="clearDrawing">Effacer</button>
+            <button id="thickLine">Épais</button>
+            <button id="thinLine">Fin</button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -494,7 +567,6 @@
   <script>
     // ===== INITIALISATION =====
     const startScreen = document.getElementById("startScreen");
-    const loading = document.getElementById("loading");
     const skipButton = document.getElementById("skipButton");
     const introMusic = document.getElementById("introMusic");
     const bgMusic = document.getElementById("bgMusic");
@@ -506,33 +578,30 @@
     const clock = document.getElementById("clock");
     let isFading = false;
 
-    // Démarrage automatique
+    // Démarrage automatique avec skip direct
     window.addEventListener('load', () => {
-      loading.classList.add("active");
       introMusic.volume = 0.6;
       bgMusic.volume = 0.5;
       introMusic.play();
       
       setTimeout(() => {
-        introMusic.pause();
-        loading.classList.remove("active");
-        startScreen.style.animation = "fadeOut 0.8s forwards";
-        setTimeout(() => {
-          bgMusic.play();
-        }, 500);
+        skipIntro();
       }, 8000);
     });
 
-    // Bouton skip
+    // Bouton skip avec transition directe
     skipButton.addEventListener("click", () => {
       playClick();
+      skipIntro();
+    });
+
+    function skipIntro() {
       fadeOutAudio(introMusic, 300);
       startScreen.style.animation = "fadeOut 0.8s forwards";
       setTimeout(() => {
-        loading.classList.remove("active");
         bgMusic.play();
       }, 500);
-    });
+    }
 
     // Fade musique
     function fadeOutAudio(audio, duration = 500) {
@@ -540,8 +609,9 @@
       isFading = true;
       const step = audio.volume / (duration / 50);
       const fade = setInterval(() => {
-        if (audio.volume > 0.05) audio.volume -= step;
-        else {
+        if (audio.volume > 0.05) {
+          audio.volume -= step;
+        } else {
           audio.volume = 0;
           audio.pause();
           clearInterval(fade);
@@ -629,7 +699,7 @@
     let score = 0;
     let gameActive = false;
     let currentPiece = null;
-    let nextPiece = null;
+    let nextPieceObj = null;
     let gameLoop = null;
 
     const SHAPES = [
@@ -653,6 +723,26 @@
     function drawBoard() {
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Dessiner la ligne de projection
+      if (gameActive && currentPiece) {
+        const dropDistance = calculateDropDistance();
+        if (dropDistance > 0) {
+          ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)';
+          ctx.lineWidth = 1;
+          ctx.setLineDash([5, 5]);
+          currentPiece.shape.forEach((row, r) => {
+            row.forEach((cell, c) => {
+              if (cell) {
+                const x = (currentPiece.x + c) * BLOCK_SIZE;
+                const y = (currentPiece.y + r + dropDistance) * BLOCK_SIZE;
+                ctx.strokeRect(x, y, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+              }
+            });
+          });
+          ctx.setLineDash([]);
+        }
+      }
       
       for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
@@ -682,16 +772,24 @@
       }
     }
 
+    function calculateDropDistance() {
+      let dropDistance = 0;
+      while (!collides(currentPiece, 0, dropDistance + 1)) {
+        dropDistance++;
+      }
+      return dropDistance;
+    }
+
     function drawNextPiece() {
       nextCtx.fillStyle = '#000';
       nextCtx.fillRect(0, 0, nextPieceCanvas.width, nextPieceCanvas.height);
       
-      if (nextPiece) {
-        const offsetX = (nextPieceCanvas.width - nextPiece.shape[0].length * BLOCK_SIZE/2) / 2;
-        const offsetY = (nextPieceCanvas.height - nextPiece.shape.length * BLOCK_SIZE/2) / 2;
+      if (nextPieceObj) {
+        const offsetX = (nextPieceCanvas.width - nextPieceObj.shape[0].length * BLOCK_SIZE/2) / 2;
+        const offsetY = (nextPieceCanvas.height - nextPieceObj.shape.length * BLOCK_SIZE/2) / 2;
         
-        nextCtx.fillStyle = COLORS[nextPiece.color];
-        nextPiece.shape.forEach((row, r) => {
+        nextCtx.fillStyle = COLORS[nextPieceObj.color];
+        nextPieceObj.shape.forEach((row, r) => {
           row.forEach((cell, c) => {
             if (cell) {
               const x = offsetX + c * BLOCK_SIZE/2;
@@ -816,16 +914,12 @@
         canvas.classList.remove('hard-drop-animation');
       }, 300);
       
-      let dropDistance = 0;
-      while (!collides(currentPiece, 0, dropDistance + 1)) {
-        dropDistance++;
-      }
-      
+      const dropDistance = calculateDropDistance();
       currentPiece.y += dropDistance;
       mergePiece();
       clearLines();
-      currentPiece = nextPiece;
-      nextPiece = createPiece();
+      currentPiece = nextPieceObj;
+      nextPieceObj = createPiece();
       drawNextPiece();
       
       if (collides(currentPiece)) {
@@ -842,8 +936,8 @@
       } else {
         mergePiece();
         clearLines();
-        currentPiece = nextPiece;
-        nextPiece = createPiece();
+        currentPiece = nextPieceObj;
+        nextPieceObj = createPiece();
         drawNextPiece();
         if (collides(currentPiece)) {
           gameActive = false;
@@ -858,7 +952,7 @@
     function startGame() {
       initBoard();
       currentPiece = createPiece();
-      nextPiece = createPiece();
+      nextPieceObj = createPiece();
       gameActive = true;
       drawBoard();
       drawNextPiece();
@@ -908,44 +1002,103 @@
       }
     });
 
-    // ===== EFFETS VISUELS =====
+    // ===== ZONE DE NOTES AVEC DESSIN =====
+    const drawingCanvas = document.querySelector('.drawing-canvas');
+    const drawingCtx = drawingCanvas.getContext('2d');
+    const clearButton = document.getElementById('clearDrawing');
+    const thickButton = document.getElementById('thickLine');
+    const thinButton = document.getElementById('thinLine');
+    const colorOptions = document.querySelectorAll('.color-option');
     
-    // Effet de texte décrypté (version simplifiée)
-    // 1. Effet de texte décrypté sur le titre
-const titleElement = document.getElementById('mainTitle');
-const decryptedTitle = new DecryptedText(titleElement, {
-  speed: 30,
-  maxIterations: 15
-});
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let currentColor = '#00ffff';
+    let lineWidth = 2;
 
-// 2. Effet de blur graduel en bas de page
-const pageBlur = new GradualBlur({
-  position: 'bottom',
-  strength: 2
-});
+    // Initialiser le canvas de dessin
+    drawingCtx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    drawingCtx.fillRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+    drawingCtx.lineJoin = 'round';
+    drawingCtx.lineCap = 'round';
+    drawingCtx.strokeStyle = currentColor;
+    drawingCtx.lineWidth = lineWidth;
 
-// 3. Effet de particules au clic (tu dois aussi avoir la classe ClickSpark définie)
-// Si tu as la classe ClickSpark définie, ajoute ça :
-const bodySparkEffect = new ClickSpark(document.body, {
-  sparkColor: '#00ffff',
-  sparkSize: 15,
-  sparkRadius: 20,
-  sparkCount: 12,
-  duration: 500,
-  easing: 'ease-out',
-  extraScale: 1.2
-});
-    
-    // Effet de blur graduel (version simplifiée)
+    // Événements de dessin
+    drawingCanvas.addEventListener('mousedown', startDrawing);
+    drawingCanvas.addEventListener('mousemove', draw);
+    drawingCanvas.addEventListener('mouseup', stopDrawing);
+    drawingCanvas.addEventListener('mouseout', stopDrawing);
+
+    // Support pour les stylets (touch)
+    drawingCanvas.addEventListener('touchstart', handleTouch);
+    drawingCanvas.addEventListener('touchmove', handleTouch);
+    drawingCanvas.addEventListener('touchend', stopDrawing);
+
+    function handleTouch(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const mouseEvent = new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+      });
+      drawingCanvas.dispatchEvent(mouseEvent);
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      
+      drawingCtx.beginPath();
+      drawingCtx.moveTo(lastX, lastY);
+      drawingCtx.lineTo(e.offsetX, e.offsetY);
+      drawingCtx.stroke();
+      
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Contrôles de dessin
+    clearButton.addEventListener('click', () => {
+      drawingCtx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+      drawingCtx.fillRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+    });
+
+    thickButton.addEventListener('click', () => {
+      lineWidth = 5;
+      drawingCtx.lineWidth = lineWidth;
+    });
+
+    thinButton.addEventListener('click', () => {
+      lineWidth = 2;
+      drawingCtx.lineWidth = lineWidth;
+    });
+
+    colorOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        colorOptions.forEach(opt => opt.classList.remove('active'));
+        option.classList.add('active');
+        currentColor = option.dataset.color;
+        drawingCtx.strokeStyle = currentColor;
+      });
+    });
+
+    // ===== EFFET DE FLOU GRADUEL EN BAS =====
     class GradualBlur {
-  constructor(options = {}) {
-    this.position = options.position || 'bottom';
-    this.strength = options.strength || 3;
-    this.init();
-  }
+      constructor(options = {}) {
+        this.position = options.position || 'bottom';
+        this.strength = options.strength || 3;
+        this.init();
+      }
       
       init() {
-        // Création d'un élément de superposition avec dégradé
         const overlay = document.createElement('div');
         overlay.style.position = 'fixed';
         overlay.style.left = '0';
@@ -965,21 +1118,14 @@ const bodySparkEffect = new ClickSpark(document.body, {
         document.body.appendChild(overlay);
       }
     }
-    
-    // Initialisation des effets
-    document.addEventListener('DOMContentLoaded', () => {
-      // Effet de texte décrypté sur le titre principal
-      new DecryptedText(document.getElementById('mainTitle'), {
-        speed: 30,
-        maxIterations: 15
-      });
-      
-      // Effet de blur graduel en bas de page
-      new GradualBlur({
-        position: 'bottom',
-        strength: 2
-      });
+
+    // Initialiser l'effet de flou
+    const pageBlur = new GradualBlur({
+      position: 'bottom',
+      strength: 2
     });
+
+    console.log('✨ Site chargé avec succès !');
   </script>
 </body>
 </html>
