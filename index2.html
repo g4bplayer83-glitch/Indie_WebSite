@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indie_WebsiteV2</title>
+  <link rel="icon" type="image/x-icon" href="icon.ico">
   <style>
     body {
       margin: 0;
@@ -11,11 +12,75 @@
       background-color: #0b0b0b;
       color: #00ffff;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       text-align: center;
+      scroll-behavior: smooth;
     }
 
-    /* --- Écran de démarrage --- */
+    h1, h2, h3 {
+      text-shadow: 0 0 20px #00ffff;
+    }
+
+    /* Style pour le titre avec effet décrypté */
+    #mainTitle {
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #mainTitle:hover {
+      transform: scale(1.05);
+    }
+
+    /* Conteneur pour le texte animé */
+    .moving-text-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Texte animé - apparaît à droite, sort à gauche */
+    .moving-text {
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      animation: scrollText 15s linear infinite;
+    }
+
+    @keyframes scrollText {
+      0% { 
+        left: 100%;
+      }
+      100% { 
+        left: -100%;
+      }
+    }
+
+    p {
+      color: #ccfaff;
+      line-height: 1.6em;
+      max-width: 800px;
+      margin: 10px auto;
+    }
+
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      border-bottom: 1px dotted #00ffff;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: #000;
+      background: #00ffff;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    /* Écran de démarrage */
     #startScreen {
       position: fixed;
       inset: 0;
@@ -46,7 +111,7 @@
       transform: scale(1.1);
     }
 
-    /* --- Écran de chargement Wii U --- */
+    /* Écran de chargement */
     #loading {
       position: fixed;
       inset: 0;
@@ -83,57 +148,16 @@
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+    @keyframes fadeInMain { to { opacity: 1; } }
 
     main {
       opacity: 0;
       animation: fadeInMain 1s ease 9s forwards;
-      padding: 20px;
+      padding: 30px;
+      padding-bottom: 120px;
     }
 
-    @keyframes fadeInMain { to { opacity: 1; } }
-
-    h1 {
-      text-shadow: 0 0 25px #00ffff;
-      font-size: 2.4em;
-      margin: 20px 0;
-      animation: glow 2s infinite alternate ease-in-out;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffff; }
-      to { text-shadow: 0 0 40px #00ffff; }
-    }
-
-    button {
-      background: transparent;
-      border: 2px solid #00ffff;
-      border-radius: 10px;
-      color: #00ffff;
-      padding: 10px 25px;
-      margin: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    button:hover {
-      background: #00ffff;
-      color: #000;
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    video {
-      display: block;
-      margin: 25px auto;
-      border: 3px solid #00ffff;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    marquee { margin-bottom: 20px; }
-
-    /* --- Contrôleur audio --- */
+    /* Contrôleur audio */
     #soundController {
       position: fixed;
       bottom: 20px;
@@ -150,17 +174,6 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      transition: 0.3s;
-    }
-
-    #soundController button {
-      border: 1px solid #00ffff;
-      border-radius: 8px;
-      background: transparent;
-      color: #00ffff;
-      padding: 6px 12px;
-      font-size: 0.9em;
-      cursor: pointer;
     }
 
     #soundController input[type=range] {
@@ -168,14 +181,110 @@
       accent-color: #00ffff;
     }
 
-    #soundController:hover {
-      box-shadow: 0 0 25px #00ffff;
-      transform: scale(1.03);
+    img {
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      margin: 15px;
+      width: 300px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
 
-    #clock {
-      font-size: 0.9em;
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffff;
+    }
+
+    note {
+      display: block;
+      background: rgba(0, 255, 255, 0.1);
+      border-left: 4px solid #00ffff;
+      margin: 20px auto;
+      max-width: 600px;
+      padding: 10px 15px;
+      font-style: italic;
+      color: #aef6f6;
+    }
+    
+    #tetrisButton {
       color: #00ffff;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-shadow: 0 0 5px #00ffff;
+      font-weight: bold;
+      font-style: normal;
+    }
+    
+    #tetrisButton:hover {
+      color: #fff;
+      text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+      transform: scale(1.2);
+      display: inline-block;
+    }
+
+    /* Modal Tetris */
+    #tetrisModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    #tetrisModal.active {
+      display: flex;
+    }
+
+    #tetrisContainer {
+      position: relative;
+      background: rgba(0, 20, 25, 0.9);
+      border: 3px solid #00ffff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 40px #00ffff;
+    }
+
+    #closeButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: all 0.3s;
+    }
+
+    #closeButton:hover {
+      background: #00ffff;
+      color: #000;
+      transform: rotate(90deg);
+    }
+
+    #tetrisCanvas {
+      border: 2px solid #00ffff;
+      background: #000;
+      display: block;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    #tetrisInfo {
+      color: #00ffff;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1.1em;
+    }
+
+    #tetrisScore {
+      margin-top: 10px;
+      font-size: 1.3em;
+      text-shadow: 0 0 10px #00ffff;
     }
   </style>
 </head>
@@ -205,32 +314,62 @@
 
   <!-- Contenu principal -->
   <main>
-    <h1>Bienvenue sur Indie_WebsiteV2</h1>
-    <marquee direction="left" scrollamount="10"><h2>En cours de développement</h2></marquee>
-
-    <div>
-      <button onclick="playClick(); getVolume()">Quel est le volume ?</button>
-      <button onclick="playClick(); setHalfVolume()">Volume 0.2</button>
-      <button onclick="playClick(); setFullVolume()">Volume 1.0</button>
+    <h1 id="mainTitle">Bienvenue sur Indie_WebsiteV2</h1>
+    <div class="moving-text-container">
+      <h2 class="moving-text">Projet expérimental – Page HTML interactive</h2>
     </div>
 
+    <p>
+      Ce site explore les sons, les effets visuels et les animations synchronisées en HTML, CSS.
+      Il offre une expérience immersive avec musique, vidéo et interactions.
+    </p>
+
+    <note>💡 Astuce : quand vous lisez la vidéo, la musique se coupe avec un fondu automatiquement, puis reprend ensuite.</note>
+
+    <h3>Vidéo en vedette</h3>
     <video id="myVideo" width="480" height="270" controls>
       <source src="ULTRAKILL Montage - TEOAT.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo.
     </video>
 
-    <div>
-      <button onclick="playClick(); showDate()">Afficher la date et l'heure</button>
-      <p id="demo"></p>
-    </div>
+    <h3>Quelques liens utiles</h3>
+    <p>
+      🔗 <a id="scrollToImages" title="Descendre à la section des images">Voir les images plus bas</a><br>
+      🌐 <a href="https://www.mozilla.org" target="_blank" title="Visitez Mozilla dans une nouvelle fenêtre">Visitez Mozilla</a>
+    </p>
+
+    <h3 id="images-section">Galerie d'images</h3>
+    <p>Survolez les images pour voir un effet lumineux :</p>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg" alt="Un chat mignon" title="Ceci est un chat 🐱">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg" alt="Exemple d'image" title="Image d'exemple">
+
+    <note>📝 Remarque : ce site est encore en développement. Cer<span id="tetrisButton" title="Jouer à Tetris">t</span>aines fonctions peuvent évoluer.</note>
   </main>
 
-  <!-- Contrôleur flottant -->
+  <!-- Modal Tetris -->
+  <div id="tetrisModal">
+    <div id="tetrisContainer">
+      <button id="closeButton">×</button>
+      <canvas id="tetrisCanvas" width="200" height="360"></canvas>
+      <div id="tetrisInfo">
+        <div>Flèches : Déplacer | ↑ : Rotation | Espace : Chute rapide</div>
+        <div id="tetrisScore">Score: 0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contrôleur audio -->
   <div id="soundController">
     <button id="toggleMusic">⏸ Pause musique</button>
     <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5">
     <div id="clock">--:--:--</div>
   </div>
+
+  <!-- Import des scripts d'effets -->
+  <script src="decryptedText.js"></script>
+  <script src="gradualBlur.js"></script>
+  <script src="clickSpark.js"></script>
 
   <script>
     const startButton = document.getElementById("startButton");
@@ -241,15 +380,12 @@
     const hoverSound = document.getElementById("hoverSound");
     const clickSound = document.getElementById("clickSound");
     const vid = document.getElementById("myVideo");
-    const demo = document.getElementById("demo");
-
     const toggleMusic = document.getElementById("toggleMusic");
     const volumeSlider = document.getElementById("volumeSlider");
     const clock = document.getElementById("clock");
-
     let isFading = false;
 
-    // Écran de démarrage
+    // Démarrage
     startButton.addEventListener("click", () => {
       playClick();
       startScreen.style.animation = "fadeOut 0.8s forwards";
@@ -262,19 +398,18 @@
           introMusic.pause();
           loading.classList.remove("active");
           bgMusic.play();
-        }, 9000);
+        }, 8000);
       }, 500);
     });
 
-    // Fade audio
-    function fadeOutAudio(audio, duration = 1000) {
+    // Fade musique vidéo
+    function fadeOutAudio(audio, duration = 500) {
       if (isFading) return;
       isFading = true;
       const step = audio.volume / (duration / 50);
       const fade = setInterval(() => {
-        if (audio.volume > 0.05) {
-          audio.volume -= step;
-        } else {
+        if (audio.volume > 0.05) audio.volume -= step;
+        else {
           audio.volume = 0;
           audio.pause();
           clearInterval(fade);
@@ -302,12 +437,16 @@
       }, 50);
     }
 
-    // Fade musique quand la vidéo joue
     vid.addEventListener("play", () => fadeOutAudio(bgMusic, 1200));
     vid.addEventListener("pause", () => fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 1200));
     vid.addEventListener("ended", () => fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 1200));
 
-    // Sons de survol
+    // Liens interactifs
+    document.getElementById("scrollToImages").addEventListener("click", () => {
+      document.getElementById("images-section").scrollIntoView({ behavior: "smooth" });
+      playClick();
+    });
+
     document.querySelectorAll("button").forEach(btn => {
       btn.addEventListener("mouseenter", () => {
         hoverSound.currentTime = 0;
@@ -320,7 +459,7 @@
       clickSound.play();
     }
 
-    // Gestion musique / volume
+    // Musique / volume
     toggleMusic.addEventListener("click", () => {
       if (bgMusic.paused) {
         fadeInAudio(bgMusic, parseFloat(volumeSlider.value), 800);
@@ -339,16 +478,245 @@
     });
 
     // Horloge
-    setInterval(() => {
-      const now = new Date();
-      clock.textContent = now.toLocaleTimeString();
-    }, 1000);
+    setInterval(() => clock.textContent = new Date().toLocaleTimeString(), 1000);
 
-    // Fonctions utilitaires
-    function getVolume() { alert("Volume actuel : " + vid.volume); }
-    function setHalfVolume() { vid.volume = 0.2; }
-    function setFullVolume() { vid.volume = 1.0; }
-    function showDate() { demo.innerHTML = new Date().toLocaleString(); }
+    // === TETRIS ===
+    const tetrisButton = document.getElementById("tetrisButton");
+    const tetrisModal = document.getElementById("tetrisModal");
+    const closeButton = document.getElementById("closeButton");
+    const canvas = document.getElementById("tetrisCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreDisplay = document.getElementById("tetrisScore");
+
+    const ROWS = 18;
+    const COLS = 10;
+    const BLOCK_SIZE = 20;
+    let board = [];
+    let score = 0;
+    let gameActive = false;
+    let currentPiece = null;
+    let gameLoop = null;
+
+    const SHAPES = [
+      [[1,1,1,1]], // I
+      [[1,1],[1,1]], // O
+      [[0,1,0],[1,1,1]], // T
+      [[1,0,0],[1,1,1]], // L
+      [[0,0,1],[1,1,1]], // J
+      [[0,1,1],[1,1,0]], // S
+      [[1,1,0],[0,1,1]]  // Z
+    ];
+
+    const COLORS = ['#00ffff', '#ffff00', '#ff00ff', '#00ff00', '#ff8800', '#ff0000', '#0088ff'];
+
+    function initBoard() {
+      board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+      score = 0;
+      scoreDisplay.textContent = `Score: ${score}`;
+    }
+
+    function drawBoard() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (board[r][c]) {
+            ctx.fillStyle = COLORS[board[r][c] - 1];
+            ctx.fillRect(c * BLOCK_SIZE, r * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+            ctx.strokeStyle = '#00ffff';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(c * BLOCK_SIZE, r * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+          }
+        }
+      }
+
+      if (currentPiece) {
+        ctx.fillStyle = COLORS[currentPiece.color];
+        currentPiece.shape.forEach((row, r) => {
+          row.forEach((cell, c) => {
+            if (cell) {
+              const x = (currentPiece.x + c) * BLOCK_SIZE;
+              const y = (currentPiece.y + r) * BLOCK_SIZE;
+              ctx.fillRect(x, y, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+              ctx.strokeStyle = '#00ffff';
+              ctx.strokeRect(x, y, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+            }
+          });
+        });
+      }
+    }
+
+    function createPiece() {
+      const shapeIndex = Math.floor(Math.random() * SHAPES.length);
+      return {
+        shape: SHAPES[shapeIndex],
+        color: shapeIndex,
+        x: Math.floor(COLS / 2) - 1,
+        y: 0
+      };
+    }
+
+    function collides(piece, offsetX = 0, offsetY = 0) {
+      for (let r = 0; r < piece.shape.length; r++) {
+        for (let c = 0; c < piece.shape[r].length; c++) {
+          if (piece.shape[r][c]) {
+            const newX = piece.x + c + offsetX;
+            const newY = piece.y + r + offsetY;
+            if (newX < 0 || newX >= COLS || newY >= ROWS) return true;
+            if (newY >= 0 && board[newY][newX]) return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function mergePiece() {
+      currentPiece.shape.forEach((row, r) => {
+        row.forEach((cell, c) => {
+          if (cell) {
+            const y = currentPiece.y + r;
+            const x = currentPiece.x + c;
+            if (y >= 0) board[y][x] = currentPiece.color + 1;
+          }
+        });
+      });
+    }
+
+    function clearLines() {
+      let linesCleared = 0;
+      for (let r = ROWS - 1; r >= 0; r--) {
+        if (board[r].every(cell => cell !== 0)) {
+          board.splice(r, 1);
+          board.unshift(Array(COLS).fill(0));
+          linesCleared++;
+          r++;
+        }
+      }
+      if (linesCleared > 0) {
+        score += linesCleared * 100;
+        scoreDisplay.textContent = `Score: ${score}`;
+      }
+    }
+
+    function rotatePiece() {
+      const rotated = currentPiece.shape[0].map((_, i) =>
+        currentPiece.shape.map(row => row[i]).reverse()
+      );
+      const oldShape = currentPiece.shape;
+      currentPiece.shape = rotated;
+      if (collides(currentPiece)) {
+        currentPiece.shape = oldShape;
+      }
+    }
+
+    function gameStep() {
+      if (!collides(currentPiece, 0, 1)) {
+        currentPiece.y++;
+      } else {
+        mergePiece();
+        clearLines();
+        currentPiece = createPiece();
+        if (collides(currentPiece)) {
+          gameActive = false;
+          clearInterval(gameLoop);
+          alert(`Game Over! Score: ${score}`);
+          tetrisModal.classList.remove("active");
+        }
+      }
+      drawBoard();
+    }
+
+    function startGame() {
+      initBoard();
+      currentPiece = createPiece();
+      gameActive = true;
+      drawBoard();
+      gameLoop = setInterval(gameStep, 500);
+    }
+
+    tetrisButton.addEventListener("click", () => {
+      playClick();
+      tetrisModal.classList.add("active");
+      startGame();
+    });
+
+    closeButton.addEventListener("click", () => {
+      playClick();
+      tetrisModal.classList.remove("active");
+      gameActive = false;
+      if (gameLoop) clearInterval(gameLoop);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!gameActive) return;
+      
+      // Empêcher le scroll de la page avec les flèches
+      if (["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+      
+      if (e.key === "ArrowLeft" && !collides(currentPiece, -1, 0)) {
+        currentPiece.x--;
+      } else if (e.key === "ArrowRight" && !collides(currentPiece, 1, 0)) {
+        currentPiece.x++;
+      } else if (e.key === "ArrowDown" && !collides(currentPiece, 0, 1)) {
+        currentPiece.y++;
+      } else if (e.key === "ArrowUp") {
+        rotatePiece();
+      } else if (e.key === " ") {
+        while (!collides(currentPiece, 0, 1)) {
+          currentPiece.y++;
+        }
+      }
+      drawBoard();
+    });
+
+    tetrisModal.addEventListener("click", (e) => {
+      if (e.target === tetrisModal) {
+        tetrisModal.classList.remove("active");
+        gameActive = false;
+        if (gameLoop) clearInterval(gameLoop);
+      }
+    });
+
+    // ===== INITIALISATION DES EFFETS =====
+    
+    // 1. Effet de texte décrypté sur le titre
+    const titleElement = document.getElementById('mainTitle');
+    const decryptedTitle = new DecryptedText(titleElement, {
+      speed: 30,
+      maxIterations: 15,
+      animateOn: 'hover',
+      sequential: true,
+      revealDirection: 'start'
+    });
+
+    // 2. Effet de blur graduel en bas de page
+    const pageBlur = new GradualBlur({
+      position: 'bottom',
+      strength: 3,
+      height: '8rem',
+      divCount: 6,
+      exponential: true,
+      opacity: 0.9,
+      curve: 'ease-out',
+      target: 'page'
+    });
+
+    // 3. Effet de particules au clic sur tout le body
+    const bodySparkEffect = new ClickSpark(document.body, {
+      sparkColor: '#00ffff',
+      sparkSize: 15,
+      sparkRadius: 20,
+      sparkCount: 12,
+      duration: 500,
+      easing: 'ease-out',
+      extraScale: 1.2
+    });
+
+    console.log('✨ Tous les effets sont chargés !');
   </script>
+  
 </body>
 </html>
