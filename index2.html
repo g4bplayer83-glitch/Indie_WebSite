@@ -21,10 +21,11 @@
       text-shadow: 0 0 20px #00ffff;
     }
 
-    /* Style pour le titre avec effet décrypté */
+    /* Style pour le titre avec effet décrypté */ 
     #mainTitle {
       cursor: pointer;
       transition: all 0.3s;
+      text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
     }
 
     #mainTitle:hover {
@@ -93,22 +94,23 @@
       animation: fadeIn 1s ease;
     }
 
-    #startScreen button {
-      padding: 14px 32px;
-      background: transparent;
-      border: 2px solid #00ffff;
+    #skipButton {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background: rgba(0, 255, 255, 0.2);
+      border: 1px solid #00ffff;
       color: #00ffff;
-      font-size: 1.2em;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s;
+      font-size: 0.9em;
     }
 
-    #startScreen button:hover {
-      background: #00ffff;
-      color: #000;
-      box-shadow: 0 0 20px #00ffff;
-      transform: scale(1.1);
+    #skipButton:hover {
+      background: rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 10px #00ffff;
     }
 
     /* Écran de chargement */
@@ -127,7 +129,7 @@
     }
 
     #loading.active {
-      opacity: 1;
+      opacity: 0;
       visibility: visible;
     }
 
@@ -187,6 +189,7 @@
       margin: 15px;
       width: 300px;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
     }
 
     img:hover {
@@ -203,6 +206,7 @@
       padding: 10px 15px;
       font-style: italic;
       color: #aef6f6;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
     }
     
     #tetrisButton {
@@ -244,6 +248,8 @@
       border-radius: 15px;
       padding: 20px;
       box-shadow: 0 0 40px #00ffff;
+      display: flex;
+      gap: 20px;
     }
 
     #closeButton {
@@ -274,6 +280,13 @@
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
 
+    #nextPieceCanvas {
+      border: 2px solid #00ffff;
+      background: #000;
+      display: block;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
     #tetrisInfo {
       color: #00ffff;
       text-align: center;
@@ -286,6 +299,73 @@
       font-size: 1.3em;
       text-shadow: 0 0 10px #00ffff;
     }
+
+    .tetris-sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .paragraphe-style {
+      text-align: justify;
+      text-justify: inter-word;
+      line-height: 1.6;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #4a41878b;
+      border-left: 25px solid #527d99;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    }
+
+    /* Footer avec note */
+    .footer-note {
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #00ffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 30px auto;
+      max-width: 800px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
+    /* Animation de particules pour Tetris */
+    .tetris-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00ffff;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    @keyframes particle-fall {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(50px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Animation de chute rapide */
+    @keyframes hard-drop {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .hard-drop-animation {
+      animation: hard-drop 0.3s ease;
+    }
   </style>
 </head>
 
@@ -294,8 +374,8 @@
   <!-- Écran de démarrage -->
   <div id="startScreen">
     <h1>Indie_WebsiteV2</h1>
-    <p style="color:#00ffff;margin-bottom:20px;">Appuyez pour commencer</p>
-    <button id="startButton">▶ Commencer</button>
+    <p style="color:#00ffff;margin-bottom:20px;">Chargement en cours...</p>
+    <button id="skipButton">⏩ Passer</button>
   </div>
 
   <!-- Écran de chargement -->
@@ -338,6 +418,28 @@
       🌐 <a href="https://www.mozilla.org" target="_blank" title="Visitez Mozilla dans une nouvelle fenêtre">Visitez Mozilla</a>
     </p>
 
+    <h1 style="color: #e60012; margin-bottom: 10px; text-shadow: 0 0 10px rgba(230, 0, 18, 0.7);">L'histoire de la console " WII U "</h1>
+    
+    <p class="paragraphe-style">
+      Lancée en 2012, la Wii U représentait la tentative ambitieuse de Nintendo de réconcilier deux publics distincts : les joueurs occasionnels qui avaient adoré la Wii et les joueurs plus hardcore qui s'en étaient détournés. Le concept central reposait sur le GamePad, une manette innovante intégrant un écran tactile, permettant des expériences de jeu asymétriques et le jeu sans télévision.
+    </p>
+
+    <p class="paragraphe-style">
+      Malheureusement, la console a souffert d'un problème de communication majeur dès son annonce. Le nom "Wii U" et le design du GamePad ont créé une confusion généralisée, beaucoup croyant qu'il s'agissait d'un simple accessoire pour la Wii originale. Cette ambiguïté initiale a entravé sa compréhension par le grand public et a constitué un handicap majeur pour son adoption.
+    </p>
+
+    <p class="paragraphe-style">
+      Malgré une puissance supérieure à sa génération précédente, la Wii U s'est retrouvée techniquement dépassée par l'arrivée des PlayStation 4 et Xbox One. Elle a également subi de longs délais sans sorties majeures, les éditeurs tiers lui accordant un support limité. La console a ainsi survécu principalement grâce à ses titres internes, comme "Mario Kart 8", "Super Smash Bros." et la nouvelle franchise "Splatoon".
+    </p>
+
+    <p class="paragraphe-style">
+      Commercialement, la Wii U est considérée comme un échec pour Nintendo, avec seulement environ 13,5 millions d'unités vendues. Cependant, son héritage est immense. Elle a servi de banc d'essai pour des concepts qui ont été perfectionnés avec la Nintendo Switch. Des jeux comme "Breath of the Wild" et les mécaniques de jeu hybrides ont été directement influencés par les innovations, malheureusement sous-exploitées, de la Wii U.
+    </p>
+
+    <p class="paragraphe-style conclusion">
+      En définitive, la Wii U reste une console tragiquement en avance sur son temps. Son échec a fourni à Nintendo des leçons cruciales qui ont conduit au succès planétaire de la Switch, faisant d'elle une pièce maîtresse, bien que méconnue, de l'histoire du jeu vidéo.
+    </p>
+
     <h3 id="images-section">Galerie d'images</h3>
     <p>Survolez les images pour voir un effet lumineux :</p>
 
@@ -345,16 +447,39 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg" alt="Exemple d'image" title="Image d'exemple">
 
     <note>📝 Remarque : ce site est encore en développement. Cer<span id="tetrisButton" title="Jouer à Tetris">t</span>aines fonctions peuvent évoluer.</note>
+
+    <!-- Footer avec note -->
+    <div class="footer-note">
+      <h3>Notes du développeur</h3>
+      <p>N'hésitez pas à explorer toutes les fonctionnalités cachées !</p>
+    </div>
   </main>
 
   <!-- Modal Tetris -->
   <div id="tetrisModal">
     <div id="tetrisContainer">
       <button id="closeButton">×</button>
-      <canvas id="tetrisCanvas" width="200" height="360"></canvas>
-      <div id="tetrisInfo">
-        <div>Flèches : Déplacer | ↑ : Rotation | Espace : Chute rapide</div>
-        <div id="tetrisScore">Score: 0</div>
+      <div>
+        <canvas id="tetrisCanvas" width="200" height="360"></canvas>
+        <div id="tetrisInfo">
+          <div>Flèches : Déplacer | ↑ : Rotation | Espace : Chute rapide</div>
+          <div id="tetrisScore">Score: 0</div>
+        </div>
+      </div>
+      <div class="tetris-sidebar">
+        <div>
+          <h4 style="margin: 0 0 10px 0; text-shadow: 0 0 5px #00ffff;">Prochain:</h4>
+          <canvas id="nextPieceCanvas" width="80" height="80"></canvas>
+        </div>
+        <div>
+          <h4 style="margin: 10px 0; text-shadow: 0 0 5px #00ffff;">Contrôles:</h4>
+          <p style="font-size: 0.8em; text-align: left; margin: 5px 0;">
+            ← → : Déplacer<br>
+            ↑ : Tourner<br>
+            ↓ : Descendre<br>
+            Espace : Poser
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -366,15 +491,11 @@
     <div id="clock">--:--:--</div>
   </div>
 
-  <!-- Import des scripts d'effets -->
-  <script src="decryptedText.js"></script>
-  <script src="gradualBlur.js"></script>
-  <script src="clickSpark.js"></script>
-
   <script>
-    const startButton = document.getElementById("startButton");
+    // ===== INITIALISATION =====
     const startScreen = document.getElementById("startScreen");
     const loading = document.getElementById("loading");
+    const skipButton = document.getElementById("skipButton");
     const introMusic = document.getElementById("introMusic");
     const bgMusic = document.getElementById("bgMusic");
     const hoverSound = document.getElementById("hoverSound");
@@ -385,24 +506,35 @@
     const clock = document.getElementById("clock");
     let isFading = false;
 
-    // Démarrage
-    startButton.addEventListener("click", () => {
+    // Démarrage automatique
+    window.addEventListener('load', () => {
+      loading.classList.add("active");
+      introMusic.volume = 0.6;
+      bgMusic.volume = 0.5;
+      introMusic.play();
+      
+      setTimeout(() => {
+        introMusic.pause();
+        loading.classList.remove("active");
+        startScreen.style.animation = "fadeOut 0.8s forwards";
+        setTimeout(() => {
+          bgMusic.play();
+        }, 500);
+      }, 8000);
+    });
+
+    // Bouton skip
+    skipButton.addEventListener("click", () => {
       playClick();
+      fadeOutAudio(introMusic, 300);
       startScreen.style.animation = "fadeOut 0.8s forwards";
       setTimeout(() => {
-        loading.classList.add("active");
-        introMusic.volume = 0.6;
-        bgMusic.volume = 0.5;
-        introMusic.play();
-        setTimeout(() => {
-          introMusic.pause();
-          loading.classList.remove("active");
-          bgMusic.play();
-        }, 8000);
+        loading.classList.remove("active");
+        bgMusic.play();
       }, 500);
     });
 
-    // Fade musique vidéo
+    // Fade musique
     function fadeOutAudio(audio, duration = 500) {
       if (isFading) return;
       isFading = true;
@@ -480,12 +612,14 @@
     // Horloge
     setInterval(() => clock.textContent = new Date().toLocaleTimeString(), 1000);
 
-    // === TETRIS ===
+    // ===== TETRIS AMÉLIORÉ =====
     const tetrisButton = document.getElementById("tetrisButton");
     const tetrisModal = document.getElementById("tetrisModal");
     const closeButton = document.getElementById("closeButton");
     const canvas = document.getElementById("tetrisCanvas");
+    const nextPieceCanvas = document.getElementById("nextPieceCanvas");
     const ctx = canvas.getContext("2d");
+    const nextCtx = nextPieceCanvas.getContext("2d");
     const scoreDisplay = document.getElementById("tetrisScore");
 
     const ROWS = 18;
@@ -495,6 +629,7 @@
     let score = 0;
     let gameActive = false;
     let currentPiece = null;
+    let nextPiece = null;
     let gameLoop = null;
 
     const SHAPES = [
@@ -547,6 +682,29 @@
       }
     }
 
+    function drawNextPiece() {
+      nextCtx.fillStyle = '#000';
+      nextCtx.fillRect(0, 0, nextPieceCanvas.width, nextPieceCanvas.height);
+      
+      if (nextPiece) {
+        const offsetX = (nextPieceCanvas.width - nextPiece.shape[0].length * BLOCK_SIZE/2) / 2;
+        const offsetY = (nextPieceCanvas.height - nextPiece.shape.length * BLOCK_SIZE/2) / 2;
+        
+        nextCtx.fillStyle = COLORS[nextPiece.color];
+        nextPiece.shape.forEach((row, r) => {
+          row.forEach((cell, c) => {
+            if (cell) {
+              const x = offsetX + c * BLOCK_SIZE/2;
+              const y = offsetY + r * BLOCK_SIZE/2;
+              nextCtx.fillRect(x, y, BLOCK_SIZE/2 - 1, BLOCK_SIZE/2 - 1);
+              nextCtx.strokeStyle = '#00ffff';
+              nextCtx.strokeRect(x, y, BLOCK_SIZE/2 - 1, BLOCK_SIZE/2 - 1);
+            }
+          });
+        });
+      }
+    }
+
     function createPiece() {
       const shapeIndex = Math.floor(Math.random() * SHAPES.length);
       return {
@@ -571,13 +729,46 @@
       return false;
     }
 
+    // Fonction pour créer des particules
+    function createParticles(x, y, count = 8) {
+      for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'tetris-particle';
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        document.body.appendChild(particle);
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 30 + 10;
+        const targetX = x + Math.cos(angle) * distance;
+        const targetY = y + Math.sin(angle) * distance;
+        
+        particle.style.animation = `particle-fall ${Math.random() * 0.5 + 0.3}s ease forwards`;
+        particle.style.left = `${targetX}px`;
+        
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 500);
+      }
+    }
+
     function mergePiece() {
+      // Créer des particules à chaque bloc posé
       currentPiece.shape.forEach((row, r) => {
         row.forEach((cell, c) => {
           if (cell) {
             const y = currentPiece.y + r;
             const x = currentPiece.x + c;
-            if (y >= 0) board[y][x] = currentPiece.color + 1;
+            if (y >= 0) {
+              board[y][x] = currentPiece.color + 1;
+              // Créer des particules à la position du bloc
+              const canvasRect = canvas.getBoundingClientRect();
+              const particleX = canvasRect.left + x * BLOCK_SIZE + BLOCK_SIZE/2;
+              const particleY = canvasRect.top + y * BLOCK_SIZE + BLOCK_SIZE/2;
+              createParticles(particleX, particleY, 3);
+            }
           }
         });
       });
@@ -587,6 +778,14 @@
       let linesCleared = 0;
       for (let r = ROWS - 1; r >= 0; r--) {
         if (board[r].every(cell => cell !== 0)) {
+          // Créer plus de particules pour une ligne complète
+          for (let c = 0; c < COLS; c++) {
+            const canvasRect = canvas.getBoundingClientRect();
+            const particleX = canvasRect.left + c * BLOCK_SIZE + BLOCK_SIZE/2;
+            const particleY = canvasRect.top + r * BLOCK_SIZE + BLOCK_SIZE/2;
+            createParticles(particleX, particleY, 5);
+          }
+          
           board.splice(r, 1);
           board.unshift(Array(COLS).fill(0));
           linesCleared++;
@@ -610,13 +809,42 @@
       }
     }
 
+    function hardDrop() {
+      // Animation de flash
+      canvas.classList.add('hard-drop-animation');
+      setTimeout(() => {
+        canvas.classList.remove('hard-drop-animation');
+      }, 300);
+      
+      let dropDistance = 0;
+      while (!collides(currentPiece, 0, dropDistance + 1)) {
+        dropDistance++;
+      }
+      
+      currentPiece.y += dropDistance;
+      mergePiece();
+      clearLines();
+      currentPiece = nextPiece;
+      nextPiece = createPiece();
+      drawNextPiece();
+      
+      if (collides(currentPiece)) {
+        gameActive = false;
+        clearInterval(gameLoop);
+        alert(`Game Over! Score: ${score}`);
+        tetrisModal.classList.remove("active");
+      }
+    }
+
     function gameStep() {
       if (!collides(currentPiece, 0, 1)) {
         currentPiece.y++;
       } else {
         mergePiece();
         clearLines();
-        currentPiece = createPiece();
+        currentPiece = nextPiece;
+        nextPiece = createPiece();
+        drawNextPiece();
         if (collides(currentPiece)) {
           gameActive = false;
           clearInterval(gameLoop);
@@ -630,8 +858,10 @@
     function startGame() {
       initBoard();
       currentPiece = createPiece();
+      nextPiece = createPiece();
       gameActive = true;
       drawBoard();
+      drawNextPiece();
       gameLoop = setInterval(gameStep, 500);
     }
 
@@ -665,9 +895,7 @@
       } else if (e.key === "ArrowUp") {
         rotatePiece();
       } else if (e.key === " ") {
-        while (!collides(currentPiece, 0, 1)) {
-          currentPiece.y++;
-        }
+        hardDrop();
       }
       drawBoard();
     });
@@ -680,43 +908,78 @@
       }
     });
 
-    // ===== INITIALISATION DES EFFETS =====
+    // ===== EFFETS VISUELS =====
     
+    // Effet de texte décrypté (version simplifiée)
     // 1. Effet de texte décrypté sur le titre
-    const titleElement = document.getElementById('mainTitle');
-    const decryptedTitle = new DecryptedText(titleElement, {
-      speed: 30,
-      maxIterations: 15,
-      animateOn: 'hover',
-      sequential: true,
-      revealDirection: 'start'
-    });
+const titleElement = document.getElementById('mainTitle');
+const decryptedTitle = new DecryptedText(titleElement, {
+  speed: 30,
+  maxIterations: 15
+});
 
-    // 2. Effet de blur graduel en bas de page
-    const pageBlur = new GradualBlur({
-      position: 'bottom',
-      strength: 3,
-      height: '8rem',
-      divCount: 6,
-      exponential: true,
-      opacity: 0.9,
-      curve: 'ease-out',
-      target: 'page'
-    });
+// 2. Effet de blur graduel en bas de page
+const pageBlur = new GradualBlur({
+  position: 'bottom',
+  strength: 2
+});
 
-    // 3. Effet de particules au clic sur tout le body
-    const bodySparkEffect = new ClickSpark(document.body, {
-      sparkColor: '#00ffff',
-      sparkSize: 15,
-      sparkRadius: 20,
-      sparkCount: 12,
-      duration: 500,
-      easing: 'ease-out',
-      extraScale: 1.2
+// 3. Effet de particules au clic (tu dois aussi avoir la classe ClickSpark définie)
+// Si tu as la classe ClickSpark définie, ajoute ça :
+const bodySparkEffect = new ClickSpark(document.body, {
+  sparkColor: '#00ffff',
+  sparkSize: 15,
+  sparkRadius: 20,
+  sparkCount: 12,
+  duration: 500,
+  easing: 'ease-out',
+  extraScale: 1.2
+});
+    
+    // Effet de blur graduel (version simplifiée)
+    class GradualBlur {
+  constructor(options = {}) {
+    this.position = options.position || 'bottom';
+    this.strength = options.strength || 3;
+    this.init();
+  }
+      
+      init() {
+        // Création d'un élément de superposition avec dégradé
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.left = '0';
+        overlay.style.right = '0';
+        overlay.style.height = '100px';
+        overlay.style.pointerEvents = 'none';
+        overlay.style.zIndex = '999';
+        
+        if (this.position === 'bottom') {
+          overlay.style.bottom = '0';
+          overlay.style.background = 'linear-gradient(to top, rgba(11,11,11,0.8), transparent)';
+        } else {
+          overlay.style.top = '0';
+          overlay.style.background = 'linear-gradient(to bottom, rgba(11,11,11,0.8), transparent)';
+        }
+        
+        document.body.appendChild(overlay);
+      }
+    }
+    
+    // Initialisation des effets
+    document.addEventListener('DOMContentLoaded', () => {
+      // Effet de texte décrypté sur le titre principal
+      new DecryptedText(document.getElementById('mainTitle'), {
+        speed: 30,
+        maxIterations: 15
+      });
+      
+      // Effet de blur graduel en bas de page
+      new GradualBlur({
+        position: 'bottom',
+        strength: 2
+      });
     });
-
-    console.log('✨ Tous les effets sont chargés !');
   </script>
-  
 </body>
 </html>
