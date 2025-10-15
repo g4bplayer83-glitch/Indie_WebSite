@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histoire Nintendo - Indie_WebsiteV2</title>
+  <link rel="icon" type="image/x-icon" href="icon.ico">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0b0b;
+      color: #00ffff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      text-shadow: 0 0 20px #00ffff;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px;
+      padding-bottom: 80px;
+    }
+
+    .console-card {
+      background: rgba(0, 255, 255, 0.1);
+      border: 2px solid #00ffff;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .console-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px #00ffff;
+    }
+
+    .console-title {
+      color: #ff4444;
+      font-size: 2em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(255, 68, 68, 0.7);
+      border-bottom: 2px solid #ff4444;
+      padding-bottom: 10px;
+    }
+
+    .console-info {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .console-stats {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid #ff4444;
+    }
+
+    .console-stats p {
+      margin: 8px 0;
+      color: #ccfaff;
+    }
+
+    .console-description {
+      text-align: justify;
+      line-height: 1.7;
+      color: #ccfaff;
+    }
+
+    .highlight {
+      color: #ffff00;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+
+    .nav-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 255, 255, 0.2);
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1em;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      z-index: 5;
+    }
+
+    .nav-button:hover {
+      background: rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 20px #00ffff;
+      transform: scale(1.1);
+    }
+
+    .sound-controller {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 20, 25, 0.8);
+      border: 2px solid #00ffff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff;
+      padding: 12px 16px;
+      color: #00ffff;
+      font-size: 0.9em;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sound-controller input[type=range] {
+      width: 100px;
+      accent-color: #00ffff;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 40px 0;
+      padding: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #00ffff;
+      transform: translateX(-50%);
+    }
+
+    .era {
+      position: relative;
+      margin: 30px 0;
+      width: 45%;
+      padding: 15px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid #00ffff;
+    }
+
+    .era:nth-child(odd) {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .era:nth-child(even) {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .era-title {
+      color: #ffff00;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .console-card {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="font-size: 3em; margin-bottom: 10px;">🎮 Histoire de Nintendo</h1>
+    <p style="text-align: center; color: #ccfaff; font-size: 1.2em; max-width: 800px; margin: 0 auto 40px;">
+      De la NES à la Switch, découvrez l'évolution fascinante d'une entreprise qui a révolutionné le jeu vidéo.
+    </p>
+
+    <div class="timeline">
+      <div class="era">
+        <h3 class="era-title">Ère 8-bit - La Révolution</h3>
+        <p>1983-1990 : Renaissance du marché après le krach</p>
+      </div>
+    </div>
+
+    <!-- NES -->
+    <div class="console-card">
+      <h2 class="console-title">🎯 NES (1983)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 61.9M</p>
+          <p><strong>Processeur :</strong> 8-bit 1.79MHz</p>
+          <p><strong>Mémoire :</strong> 2KB</p>
+          <p><strong>Jeux cultes :</strong> Super Mario Bros., The Legend of Zelda</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Nintendo Entertainment System</span> a sauvé l'industrie du jeu vidéo après le krach de 1983. Avec son design sobre et sa manette révolutionnaire, elle a introduit des franchises légendaires.</p>
+          <p>La NES a établi les standards du jeu de plateforme moderne avec <span class="highlight">Super Mario Bros.</span> et a créé le genre action-aventure avec <span class="highlight">The Legend of Zelda</span>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Boy -->
+    <div class="console-card">
+      <h2 class="console-title">📱 Game Boy (1989)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 118.7M</p>
+          <p><strong>Écran :</strong> LCD 4 nuances de vert</p>
+          <p><strong>Autonomie :</strong> 15+ heures</p>
+          <p><strong>Jeux cultes :</strong> Tetris, Pokémon</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Game Boy</span> a démocratisé le jeu vidéo portable. Malgré sa technologie modeste, son faible coût et son autonomie exceptionnelle en ont fait un phénomène mondial.</p>
+          <p>Bundle avec <span class="highlight">Tetris</span>, elle a conquis tous les publics. La série <span class="highlight">Pokémon</span> a transformé la Game Boy en véritable phénomène culturel.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="era">
+        <h3 class="era-title">Ère 16/32-bit - L'Innovation</h3>
+        <p>1990-2001 : Conquête du marché et expérimentation</p>
+      </div>
+    </div>
+
+    <!-- SNES -->
+    <div class="console-card">
+      <h2 class="console-title">🌟 Super Nintendo (1990)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 49.1M</p>
+          <p><strong>Processeur :</strong> 16-bit 3.58MHz</p>
+          <p><strong>Couleurs :</strong> 32,768</p>
+          <p><strong>Jeux cultes :</strong> Super Mario World, Donkey Kong Country</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Super Nintendo</span> a poussé les limites techniques avec son processeur 16-bit et ses capacités sonores avancées. Elle a introduit les boutons L et R, devenus standards.</p>
+          <p>Avec des jeux comme <span class="highlight">Super Mario World</span> et <span class="highlight">A Link to the Past</span>, la SNES a créé certains des jeux les plus acclamés de l'histoire.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nintendo 64 -->
+    <div class="console-card">
+      <h2 class="console-title">🔵 Nintendo 64 (1996)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 32.9M</p>
+          <p><strong>Processeur :</strong> 64-bit 93.75MHz</p>
+          <p><strong>Innovation :</strong> Manette analogique</p>
+          <p><strong>Jeux cultes :</strong> Super Mario 64, The Legend of Zelda: Ocarina of Time</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Nintendo 64</span> a révolutionné le gameplay 3D avec sa manette analogique innovante. Bien que fidèle aux cartouches, elle a souffert face au CD-ROM.</p>
+          <p><span class="highlight">Super Mario 64</span> a défini le jeu de plateforme 3D moderne, tandis que <span class="highlight">Ocarina of Time</span> est considéré comme l'un des meilleurs jeux de tous les temps.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GameCube -->
+    <div class="console-card">
+      <h2 class="console-title">🟣 GameCube (2001)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 21.7M</p>
+          <p><strong>Support :</strong> Mini-DVD 1.5GB</p>
+          <p><strong>Processeur :</strong> 485MHz PowerPC</p>
+          <p><strong>Jeux cultes :</strong> Super Smash Bros. Melee, Metroid Prime</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">GameCube</span> a marqué le retour de Nintendo aux supports optiques avec son format propriétaire. Techniquement compétitive, elle a souffert d'une image trop "enfantin".</p>
+          <p>Elle a donné naissance à des chefs-d'œuvre comme <span class="highlight">Metroid Prime</span> et a hébergé l'excellent <span class="highlight">Super Smash Bros. Melee</span>, toujours joué en compétition.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="era">
+        <h3 class="era-title">Ère Moderne - Révolution et Redéfinition</h3>
+        <p>2004-Présent : Innovation disruptive et succès massif</p>
+      </div>
+    </div>
+
+    <!-- Nintendo DS -->
+    <div class="console-card">
+      <h2 class="console-title">📘 Nintendo DS (2004)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 154.0M</p>
+          <p><strong>Écrans :</strong> Double écran + tactile</p>
+          <p><strong>Innovation :</strong> Stylus et microphone</p>
+          <p><strong>Jeux cultes :</strong> Nintendogs, Brain Age</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Nintendo DS</span> est la console la plus vendue de l'histoire Nintendo. Son double écran, dont un tactile, a ouvert le jeu vidéo à de nouveaux publics.</p>
+          <p>Avec des titres comme <span class="highlight">Nintendogs</span> et <span class="highlight">Brain Age</span>, Nintendo a conquis les "non-joueurs" et a élargi considérablement le marché.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wii -->
+    <div class="console-card">
+      <h2 class="console-title">🎯 Wii (2006)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 101.6M</p>
+          <p><strong>Innovation :</strong> Manette à détection de mouvement</p>
+          <p><strong>Processeur :</strong> 729MHz PowerPC</p>
+          <p><strong>Jeux cultes :</strong> Wii Sports, Mario Kart Wii</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Wii</span> a révolutionné l'industrie avec ses contrôles motion simples et accessibles. En visant les "non-joueurs", Nintendo a créé un phénomène culturel mondial.</p>
+          <p><span class="highlight">Wii Sports</span>, bundle avec la console, est devenu le jeu le plus vendu de l'histoire Nintendo, démontrant l'importance de l'accessibilité.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wii U -->
+    <div class="console-card">
+      <h2 class="console-title">🎮 Wii U (2012)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 13.6M</p>
+          <p><strong>Innovation :</strong> GamePad avec écran tactile</p>
+          <p><strong>Processeur :</strong> Tri-core 1.24GHz</p>
+          <p><strong>Jeux cultes :</strong> Splatoon, Mario Kart 8</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Wii U</span> a souffert d'un problème d'identité - beaucoup la confondaient avec un accessoire Wii. Pourtant, son GamePad a introduit des concepts innovants.</p>
+          <p>Malgré son échec commercial, elle a donné naissance à <span class="highlight">Splatoon</span> et a servi de banc d'essai pour des idées qui ont abouti à la Nintendo Switch.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nintendo Switch -->
+    <div class="console-card">
+      <h2 class="console-title">🔄 Nintendo Switch (2017)</h2>
+      <div class="console-info">
+        <div class="console-stats">
+          <p><strong>Ventes :</strong> 130M+</p>
+          <p><strong>Innovation :</strong> Console hybride</p>
+          <p><strong>Écran :</strong> 6.2" LCD/OLED</p>
+          <p><strong>Jeux cultes :</strong> Breath of the Wild, Animal Crossing</p>
+        </div>
+        <div class="console-description">
+          <p>La <span class="highlight">Nintendo Switch</span> a parfaitement fusionné l'expérience console et portable. Son concept hybride a rencontré un succès planétaire immédiat.</p>
+          <p>Avec <span class="highlight">Breath of the Wild</span> et <span class="highlight">Animal Crossing: New Horizons</span>, Nintendo a démontré sa maîtrise du gameplay innovant et de la création de phénomènes culturels.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="console-card" style="background: rgba(255, 68, 68, 0.1); border-color: #ff4444;">
+      <h2 style="color: #ffff00; text-shadow: 0 0 15px rgba(255, 255, 0, 0.7);">🏆 L'Héritage Nintendo</h2>
+      <div class="console-description" style="text-align: center; font-size: 1.1em;">
+        <p>De la NES à la Switch, Nintendo a constamment repoussé les limites de l'innovation tout en restant fidèle à sa philosophie : <span class="highlight">"Le gameplay avant tout"</span>.</p>
+        <p>Alors que d'autres se concentrent sur la puissance brute, Nintendo prouve depuis 40 ans que la créativité, l'innovation et le fun pur sont les véritables clés du succès dans le jeu vidéo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton de retour -->
+  <button class="nav-button" onclick="window.location.href='index2.html'">
+    🏠 Retour Accueil
+  </button>
+
+  <!-- Contrôleur audio -->
+  <div class="sound-controller">
+    <button id="toggleMusic">⏸ Pause musique</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.5">
+    <div id="clock">--:--:--</div>
+  </div>
+
+  <script>
+    // Musique de fond
+    const bgMusic = new Audio('music.wav');
+    bgMusic.loop = true;
+    bgMusic.volume = 0.5;
+
+    // Démarrer la musique
+    window.addEventListener('load', () => {
+      bgMusic.play();
+    });
+
+    // Contrôles audio
+    const toggleMusic = document.getElementById('toggleMusic');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const clock = document.getElementById('clock');
+
+    toggleMusic.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleMusic.textContent = "⏸ Pause musique";
+      } else {
+        bgMusic.pause();
+        toggleMusic.textContent = "▶ Reprendre musique";
+      }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      bgMusic.volume = parseFloat(volumeSlider.value);
+    });
+
+    // Horloge
+    setInterval(() => {
+      clock.textContent = new Date().toLocaleTimeString();
+    }, 1000);
+
+    // Animation au scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeIn 0.6s ease-out';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.console-card').forEach(card => {
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
