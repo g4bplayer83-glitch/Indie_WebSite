@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indie_WebsiteV2</title>
+  <title>Indie_WebsiteV2 - Accueil</title>
   <link rel="icon" type="image/x-icon" href="icon.ico">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #0b0b0b;
+      background-color: #010023;
       color: #00ffff;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
@@ -385,6 +385,29 @@
       border-color: #fff;
     }
 
+    /* Bouton de navigation */
+    .nav-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 255, 255, 0.2);
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1em;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      z-index: 5;
+    }
+
+    .nav-button:hover {
+      background: rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 20px #00ffff;
+      transform: scale(1.1);
+    }
+
     /* Animation de particules pour Tetris */
     .tetris-particle {
       position: absolute;
@@ -470,26 +493,26 @@
       🌐 <a href="https://www.mozilla.org" target="_blank" title="Visitez Mozilla dans une nouvelle fenêtre">Visitez Mozilla</a>
     </p>
 
-    <h1 style="color: #e60012; margin-bottom: 10px; text-shadow: 0 0 10px rgba(230, 0, 18, 0.7);">L'histoire de la console " WII U "</h1>
+    <h1 style="color: #ff4444; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 68, 68, 0.7);">ULTRAKILL - Le Jeu</h1>
     
     <p class="paragraphe-style">
-      Lancée en 2012, la Wii U représentait la tentative ambitieuse de Nintendo de réconcilier deux publics distincts : les joueurs occasionnels qui avaient adoré la Wii et les joueurs plus hardcore qui s'en étaient détournés. Le concept central reposait sur le GamePad, une manette innovante intégrant un écran tactile, permettant des expériences de jeu asymétriques et le jeu sans télévision.
+      <strong>ULTRAKILL</strong> est un FPS (First-Person Shooter) développé par Arsi "Hakita" Patala, sorti en accès anticipé en 2020. Inspiré des jeux de tir classiques des années 90 comme <em>Quake</em> et <em>Doom</em>, il se distingue par son gameplay ultra-rapide, son style rétro et sa mécanique de combat innovante.
     </p>
 
     <p class="paragraphe-style">
-      Malheureusement, la console a souffert d'un problème de communication majeur dès son annonce. Le nom "Wii U" et le design du GamePad ont créé une confusion généralisée, beaucoup croyant qu'il s'agissait d'un simple accessoire pour la Wii originale. Cette ambiguïté initiale a entravé sa compréhension par le grand public et a constitué un handicap majeur pour son adoption.
+      Le jeu se déroule dans un enfer post-apocalyptique où l'humanité a disparu. Vous incarnez V1, une machine alimentée par le sang, qui pénètre en enfer pour survivre. L'histoire est minimaliste mais profonde, explorant des thèmes comme la nature de la conscience et la moralité dans un monde sans humains.
     </p>
 
     <p class="paragraphe-style">
-      Malgré une puissance supérieure à sa génération précédente, la Wii U s'est retrouvée techniquement dépassée par l'arrivée des PlayStation 4 et Xbox One. Elle a également subi de longs délais sans sorties majeures, les éditeurs tiers lui accordant un support limité. La console a ainsi survécu principalement grâce à ses titres internes, comme "Mario Kart 8", "Super Smash Bros." et la nouvelle franchise "Splatoon".
+      La particularité d'<strong>ULTRAKILL</strong> réside dans son système de combat basé sur le style. Plus vous êtes agressif et varié dans vos attaques, plus vous gagnez de points de style. Le jeu encourage une approche "toujours en mouvement" avec des mécaniques comme le rebond sur les balles, les dashs aériens et les executions au corps à corps.
     </p>
 
     <p class="paragraphe-style">
-      Commercialement, la Wii U est considérée comme un échec pour Nintendo, avec seulement environ 13,5 millions d'unités vendues. Cependant, son héritage est immense. Elle a servi de banc d'essai pour des concepts qui ont été perfectionnés avec la Nintendo Switch. Des jeux comme "Breath of the Wild" et les mécaniques de jeu hybrides ont été directement influencés par les innovations, malheureusement sous-exploitées, de la Wii U.
+      Avec sa bande-son metal industrielle énergique, ses visuels aux couleurs néon saisissantes et son gameplay frénétique, <strong>ULTRAKILL</strong> est devenu un titre culte dans la communauté des FPS indie. Il représente parfaitement la philosophie "gameplay first" et démontre comment un petit studio peut créer une expérience plus intense que beaucoup de jeux AAA.
     </p>
 
     <p class="paragraphe-style conclusion">
-      En définitive, la Wii U reste une console tragiquement en avance sur son temps. Son échec a fourni à Nintendo des leçons cruciales qui ont conduit au succès planétaire de la Switch, faisant d'elle une pièce maîtresse, bien que méconnue, de l'histoire du jeu vidéo.
+      En résumé, <strong>ULTRAKILL</strong> n'est pas juste un jeu de tir - c'est une symphonie de violence stylisée, un hommage aux classiques qui repousse les limites de ce que le genre FPS peut accomplir en termes de profondeur mécanique et de satisfaction pure.
     </p>
 
     <h3 id="images-section">Galerie d'images</h3>
@@ -527,6 +550,11 @@
       </div>
     </div>
   </main>
+
+  <!-- Bouton de navigation -->
+  <button class="nav-button" onclick="window.location.href='index3.html'">
+    🎮 Histoire Nintendo
+  </button>
 
   <!-- Modal Tetris -->
   <div id="tetrisModal">
@@ -578,28 +606,38 @@
     const clock = document.getElementById("clock");
     let isFading = false;
 
-    // Démarrage automatique avec skip direct
-    window.addEventListener('load', () => {
-      introMusic.volume = 0.6;
+    // Vérifier si c'est un retour (pas de chargement)
+    if (sessionStorage.getItem('returningUser')) {
+      startScreen.style.display = 'none';
+      document.querySelector('main').style.opacity = '1';
+      document.querySelector('main').style.animation = 'none';
       bgMusic.volume = 0.5;
-      introMusic.play();
-      
-      setTimeout(() => {
-        skipIntro();
-      }, 8000);
-    });
+      bgMusic.play();
+    } else {
+      // Démarrage automatique avec skip direct
+      window.addEventListener('load', () => {
+        introMusic.volume = 0.6;
+        bgMusic.volume = 0.5;
+        introMusic.play();
+        
+        setTimeout(() => {
+          skipIntro();
+        }, 8000);
+      });
 
-    // Bouton skip avec transition directe
-    skipButton.addEventListener("click", () => {
-      playClick();
-      skipIntro();
-    });
+      // Bouton skip avec transition directe
+      skipButton.addEventListener("click", () => {
+        playClick();
+        skipIntro();
+      });
+    }
 
     function skipIntro() {
       fadeOutAudio(introMusic, 300);
       startScreen.style.animation = "fadeOut 0.8s forwards";
       setTimeout(() => {
         bgMusic.play();
+        sessionStorage.setItem('returningUser', 'true');
       }, 500);
     }
 
